@@ -26,6 +26,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'users/show'
-    assert_not flash.nil? ##.nil? i dont know correct check method or not in 7.3.4
+    assert is_logged_in?
+  #  assert_not flash.nil? #8.27 reference no such line #.nil? i dont know correct check method or not in 7.3.4
   end
 end
