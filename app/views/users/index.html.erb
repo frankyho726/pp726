@@ -1,0 +1,14 @@
+<!--   # 10.37 do add index html This is a comment. Comments are not displayed in the browser-->
+
+<% provide(:title, 'All users') %> <!-- 10.45 do -->
+<h1>All users</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  
+    <%= render @users %>
+  
+</ul>
+
+<%= will_paginate %>

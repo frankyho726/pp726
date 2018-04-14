@@ -9,6 +9,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   
   test "login with invalid information" do
     get login_path
+    assert_template 'sessions/new'
     post login_path, params: { session: { email: "", password: "" } }
     assert_template 'sessions/new'
     assert_not flash.empty?
@@ -21,7 +22,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     post login_path, params: { session: { email:    @user.email,
                                           password: 'password' } }
     assert_redirected_to @user
-    follow_redirect!
+    follow_redirect!                                                         ####
     assert_template 'users/show'
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
@@ -34,7 +35,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
                                           password: 'password' } }
     assert is_logged_in?
     assert_redirected_to @user
-    follow_redirect!
+    follow_redirect!                                                        ####
     assert_template 'users/show'
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
@@ -52,7 +53,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   
   test "login with remembering" do
     log_in_as(@user, remember_me: '1')
-     assert_equal assigns(:user).remember_token, cookies['remember_token']
+     assert_equal assigns(:user).remember_token, cookies['remember_token']        #error in 10.32  fix after sessions_controller.rb def create @user
 
 #    assert_equal FILL_IN, assigns(:user).FILL_IN  #question in chapter 9.27
 #    assert_not_empty cookies['remember_token']  #in chapter 8 command
