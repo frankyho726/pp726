@@ -11,7 +11,7 @@ module SessionsHelper
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
-# 10.27 do 如果指定用户是当前用户，返回 true
+# 10.27 do Returns true if the given user is the current user.
   def current_user?(user)
     user == current_user
   end
@@ -27,8 +27,8 @@ module SessionsHelper
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
+#  debugger  #9.9
     elsif (user_id = cookies.signed[:user_id])
-     
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
         log_in user
@@ -48,13 +48,13 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
-  # 10.30 do 重定向到存储的地址或者默认地址
+  # 10.30 do Redirects to stored location (or to the default).
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
 
-  # 10.30 do 存储后面需要使用的地址
+  # 10.30 do  Stores the URL trying to be accessed.
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end

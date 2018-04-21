@@ -1,10 +1,9 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  #10.20 do
+
   def setup
     @user       = users(:michael)
-    #20.24 do
     @other_user = users(:archer)
   end
   
@@ -44,7 +43,7 @@ test "should not allow the admin attribute to be edited via the web" do
 #10.24 do
   test "should redirect edit when logged in as wrong user" do
     log_in_as(@other_user)
-    get edit_user_path(@user)                                                 
+    get edit_user_path(@user)
     assert flash.empty?
     assert_redirected_to root_url                                             #######
   end

@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  
   
   def setup  #6.5：测试用户对象一开始是有效的 GREEN
      @user = User.new(name: "Example User", email: "user@example.com",

@@ -3,8 +3,5 @@ class ApplicationController < ActionController::Base
   
   include SessionsHelper
   
-#  def hello
-#    render html:"hello, Manson, Owen and Franky"
-#  end
-  
+
 end

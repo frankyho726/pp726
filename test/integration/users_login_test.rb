@@ -53,10 +53,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   
   test "login with remembering" do
     log_in_as(@user, remember_me: '1')
-     assert_equal assigns(:user).remember_token, cookies['remember_token']        #error in 10.32  fix after sessions_controller.rb def create @user
-
-#    assert_equal FILL_IN, assigns(:user).FILL_IN  #question in chapter 9.27
-#    assert_not_empty cookies['remember_token']  #in chapter 8 command
+     assert_equal cookies['remember_token'], assigns(:user).remember_token 
+#    assert_equal assigns(:user).remember_token, cookies['remember_token']  #can also codd like this
   end
 
   test "login without remembering" do

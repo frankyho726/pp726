@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy  #10.59 do
   
   def index  #10.35 do
-    @users = User.paginate(page: params[:page])   #10.36 do >>10.46
+    @users = User.paginate(page: params[:page])#10.36 do >>10.46
   end
   
   def show
@@ -13,13 +13,14 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+   @user = User.new
   end
   
   def create
-    @user = User.new(user_params)   
+    @user = User.new(user_params)  
     if @user.save
       log_in @user
+      
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
       # 处理注册成功的情况
@@ -29,13 +30,13 @@ class UsersController < ApplicationController
   end
   
   def edit  
-# 10.25 do    @user = User.find(params[:id])
+                   # 10.25 do    @user = User.find(params[:id])
   end
   
   
   #10.12 do
   def update
-#10.25 do    @user = User.find(params[:id])
+                  #10.25 do    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
@@ -58,11 +59,11 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
+     # debugger
     end
+    # Before filters
     
-    
-
-    # 10.15 do 确保用户已登录 # 前置过滤器
+    # Confirms a logged-in user.
     def logged_in_user
       unless logged_in?
         store_location       #10.31 do
@@ -71,10 +72,10 @@ class UsersController < ApplicationController
       end
     end
 
-# 10.25 do确保是正确的用户
+     # Confirms the correct user.
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)  #10.28 do
+      redirect_to(root_url) unless current_user?(@user)
     end
 #10.59 do    
     def admin_user
