@@ -30,7 +30,8 @@ module SessionsHelper
 #  debugger  #9.9
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
-      if user && user.authenticated?(cookies[:remember_token])
+      if user && user.authenticated?(:remember, cookies[:remember_token]) #11.28 add :remember
+#        debugger
         log_in user
         @current_user = user
       end

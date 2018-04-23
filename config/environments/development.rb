@@ -1,5 +1,8 @@
 Rails.application.configure do
-  
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :test
+  host = '161356e5b38842a1a4f1793b71b8fa93.vfs.cloud9.ap-southeast-1.amazonaws.com' # Don't use this literally; use your local dev host instead
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
